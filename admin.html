@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel de administración — White Glow</title>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="shortcut icon" href="assets/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,600;0,6..96,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#15201A; --gold:#BE9A4D; --gold-light:#E4C988;
+  --ivory:#FAF7EF; --ivory-deep:#F1EAD9; --text:#20251D; --text-soft:#5C6356;
+  --line:rgba(21,32,26,0.13); --danger:#B23B3B; --ok:#3B7D4F;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{ background:var(--ivory-deep); color:var(--text); font-family:'Work Sans',sans-serif; line-height:1.5; }
+h1,h2,h3{ font-family:'Bodoni Moda',serif; font-weight:600; }
+.wrap{ max-width:1180px; margin:0 auto; padding:0 28px; }
+a{ color:inherit; }
+header{ background:var(--ink); color:var(--ivory); padding:22px 0; }
+header .wrap{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+header .brand{ display:flex; align-items:center; gap:12px; font-family:'Bodoni Moda',serif; font-size:20px; }
+header .brand img{ width:36px; height:36px; object-fit:contain; }
+header .brand span small{ display:block; font-family:'Work Sans',sans-serif; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold-light); font-weight:600; }
+header a.back{ font-size:13px; color:var(--ivory); opacity:0.75; border:1px solid rgba(250,247,239,0.3); padding:9px 16px; border-radius:2px; }
+header a.back:hover{ opacity:1; border-color:var(--gold-light); }
+
+main{ padding:36px 0 80px; }
+.tabs{ display:flex; gap:8px; margin-bottom:28px; }
+.tabbtn{ padding:11px 22px; border:1px solid var(--line); background:#fff; border-radius:30px; font-size:13.5px; cursor:pointer; font-weight:500; color:var(--text); }
+.tabbtn.active{ background:var(--ink); color:var(--ivory); border-color:var(--ink); }
+.panel{ display:none; }
+.panel.active{ display:block; }
+
+.card{ background:#fff; border:1px solid var(--line); border-radius:6px; padding:26px; margin-bottom:22px; }
+.card h2{ font-size:19px; margin-bottom:6px; }
+.card .hint{ font-size:13px; color:var(--text-soft); margin-bottom:18px; }
+
+.toolbar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:22px; align-items:center; }
+.btn{ display:inline-flex; align-items:center; gap:8px; padding:11px 20px; font-size:13px; font-weight:600; letter-spacing:0.02em; border-radius:4px; border:1px solid var(--ink); cursor:pointer; background:#fff; color:var(--ink); transition:.2s; }
+.btn:hover{ background:var(--ink); color:var(--ivory); }
+.btn-primary{ background:var(--ink); color:var(--ivory); }
+.btn-primary:hover{ background:var(--gold); border-color:var(--gold); color:var(--ink); }
+.btn-gold{ background:var(--gold); border-color:var(--gold); color:var(--ink); }
+.btn-gold:hover{ background:var(--ink); border-color:var(--ink); color:var(--ivory); }
+.btn-danger{ border-color:var(--danger); color:var(--danger); }
+.btn-danger:hover{ background:var(--danger); color:#fff; }
+.btn-sm{ padding:7px 13px; font-size:12px; }
+input[type=file]{ font-size:13px; }
+
+table{ width:100%; border-collapse:collapse; }
+th{ text-align:left; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--text-soft); padding:0 10px 10px; border-bottom:1px solid var(--line); }
+td{ padding:12px 10px; border-bottom:1px solid var(--line); font-size:13.5px; vertical-align:middle; }
+tr:last-child td{ border-bottom:none; }
+td img{ width:44px; height:44px; object-fit:cover; border-radius:4px; background:var(--ivory-deep); }
+.tag{ display:inline-block; padding:3px 9px; border-radius:30px; font-size:11px; background:var(--ivory-deep); color:var(--text-soft); }
+.row-actions{ display:flex; gap:6px; }
+.status-on{ color:var(--ok); font-weight:600; font-size:12px; }
+.status-off{ color:var(--text-soft); font-weight:600; font-size:12px; }
+
+.form-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+.form-grid.cols-1{ grid-template-columns:1fr; }
+.field{ display:flex; flex-direction:column; gap:6px; }
+.field.span2{ grid-column:1/-1; }
+.field label{ font-size:12px; font-weight:600; letter-spacing:0.02em; color:var(--text-soft); }
+.field input, .field select, .field textarea{ font-family:inherit; font-size:14px; padding:10px 12px; border:1px solid var(--line); border-radius:4px; background:var(--ivory); color:var(--text); }
+.field input:focus, .field select:focus, .field textarea:focus{ outline:2px solid var(--gold); outline-offset:1px; border-color:var(--gold); }
+.checkfield{ display:flex; align-items:center; gap:8px; flex-direction:row; }
+.checkfield input{ width:auto; }
+
+.preview-row{ display:flex; gap:14px; align-items:center; margin-top:6px; }
+.preview-row img{ width:64px; height:64px; object-fit:cover; border-radius:4px; border:1px solid var(--line); background:var(--ivory-deep); }
+
+.toast{ position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(120%); background:var(--ink); color:var(--ivory); padding:14px 24px; border-radius:4px; font-size:13.5px; box-shadow:0 18px 40px -12px rgba(0,0,0,0.5); transition:transform .3s ease; z-index:999; }
+.toast.show{ transform:translateX(-50%) translateY(0); }
+
+.empty{ text-align:center; padding:40px; color:var(--text-soft); font-size:14px; }
+.note{ background:var(--ivory-deep); border:1px dashed var(--line); border-radius:6px; padding:16px 18px; font-size:13px; color:var(--text-soft); margin-bottom:22px; }
+.note b{ color:var(--text); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand"><img src="assets/favicon-192.png" alt="White Glow"> <span>White Glow<small>Panel de administración</small></span></div>
+    <a class="back" href="index.html">← Volver al sitio</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <div class="note">
+      <b>Cómo funciona este panel:</b> todo lo que edites aquí vive solo en esta pestaña mientras trabajas — no se guarda solo. Al terminar, da clic en <b>"Descargar productos.json"</b> y/o <b>"Descargar config.json"</b> y sube esos archivos a tu hosting reemplazando los anteriores (misma carpeta que <code>index.html</code>). El sitio los lee automáticamente. Si tienes el sitio en tu hosting, este panel también puede cargar tu catálogo actual con el botón "Cargar desde el sitio en vivo".
+    </div>
+
+    <div class="tabs">
+      <button class="tabbtn active" data-panel="catalogo">Catálogo de productos</button>
+      <button class="tabbtn" data-panel="config">Configuración del sitio</button>
+    </div>
+
+    <!-- ===================== CATÁLOGO ===================== -->
+    <section class="panel active" id="panel-catalogo">
+
+      <div class="toolbar">
+        <button class="btn" id="btnLoadLive">Cargar desde el sitio en vivo</button>
+        <label class="btn" style="margin:0;">Importar productos.json
+          <input type="file" id="fileImportProducts" accept="application/json" style="display:none;">
+        </label>
+        <button class="btn btn-gold" id="btnDownloadProducts">⬇ Descargar productos.json</button>
+        <button class="btn btn-primary" id="btnNewProduct">+ Nuevo producto</button>
+      </div>
+
+      <div class="card">
+        <h2 id="productCount">Productos (0)</h2>
+        <div class="hint">Edita, activa/desactiva u oculta productos sin borrarlos. Los inactivos no aparecen en la tienda.</div>
+        <table>
+          <thead><tr><th></th><th>Producto</th><th>Categoría</th><th>Precio</th><th>Estado</th><th></th></tr></thead>
+          <tbody id="productTableBody"></tbody>
+        </table>
+        <div class="empty" id="productEmpty" style="display:none;">Aún no hay productos cargados. Importa tu productos.json o crea uno nuevo con "+ Nuevo producto".</div>
+      </div>
+
+      <div class="card" id="productFormCard" style="display:none;">
+        <h2 id="productFormTitle">Nuevo producto</h2>
+        <div class="hint">El precio va en pesos colombianos, solo números (sin puntos). La imagen es una URL pública — puedes subir tu foto a un servicio como imgbb.com o tu hosting y pegar el enlace aquí.</div>
+        <div class="form-grid">
+          <div class="field"><label>Nombre del producto</label><input type="text" id="f_nombre" placeholder="Anillo Aura"></div>
+          <div class="field"><label>Categoría</label>
+            <select id="f_categoria"><option value="joyeria">Joyería</option><option value="skincare">Skincare</option></select>
+          </div>
+          <div class="field"><label>Etiqueta (subcategoría)</label><input type="text" id="f_etiqueta" placeholder="Anillos"></div>
+          <div class="field"><label>Imagen (URL)</label><input type="text" id="f_imagen" placeholder="https://..."></div>
+          <div class="field"><label>Precio (COP)</label><input type="number" id="f_precio" placeholder="89000"></div>
+          <div class="field"><label>Precio anterior (opcional, para descuentos)</label><input type="number" id="f_precioAnterior" placeholder="95000"></div>
+          <div class="field"><label>Calificación (0–5)</label><input type="number" step="0.1" min="0" max="5" id="f_calificacion" placeholder="4.8"></div>
+          <div class="field"><label>Número de reseñas</label><input type="number" id="f_resenas" placeholder="62"></div>
+          <div class="field span2 checkfield"><input type="checkbox" id="f_activo" checked><label style="margin:0;">Producto visible en la tienda</label></div>
+        </div>
+        <div class="preview-row">
+          <img id="f_preview" src="" alt="">
+          <span class="hint" style="margin:0;">Vista previa de la imagen</span>
+        </div>
+        <div class="toolbar" style="margin-top:20px; margin-bottom:0;">
+          <button class="btn btn-primary" id="btnSaveProduct">Guardar producto</button>
+          <button class="btn" id="btnCancelProduct">Cancelar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CONFIGURACIÓN ===================== -->
+    <section class="panel" id="panel-config">
+      <div class="toolbar">
+        <button class="btn" id="btnLoadLiveConfig">Cargar desde el sitio en vivo</button>
+        <label class="btn" style="margin:0;">Importar config.json
+          <input type="file" id="fileImportConfig" accept="application/json" style="display:none;">
+        </label>
+        <button class="btn btn-gold" id="btnDownloadConfig">⬇ Descargar config.json</button>
+      </div>
+
+      <div class="card">
+        <h2>WhatsApp y mensajes</h2>
+        <div class="hint">El número va en formato internacional sin "+" ni espacios. Ejemplo Colombia: 57 + indicativo + número.</div>
+        <div class="form-grid">
+          <div class="field"><label>Número de WhatsApp</label><input type="text" id="c_whatsappNumero" placeholder="573001234567"></div>
+          <div class="field"><label>Mensaje general (botón "Escríbenos")</label><input type="text" id="c_whatsappMensaje" placeholder="Hola White Glow, quiero más información"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Barra de anuncio</h2>
+        <div class="hint">Separa cada frase con " · " (punto). Aparece arriba del todo en el sitio.</div>
+        <div class="form-grid cols-1">
+          <div class="field"><textarea id="c_anuncio" rows="2" placeholder="Envíos a toda Colombia · Empaques de regalo sin costo · Paga contraentrega"></textarea></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Contacto y redes</h2>
+        <div class="form-grid">
+          <div class="field"><label>Ciudad / ubicación (footer)</label><input type="text" id="c_ciudad" placeholder="Medellín, Colombia"></div>
+          <div class="field"><label>Instagram (URL)</label><input type="text" id="c_instagram" placeholder="https://instagram.com/whiteglow"></div>
+          <div class="field"><label>TikTok (URL)</label><input type="text" id="c_tiktok" placeholder="https://tiktok.com/@whiteglow"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Estadísticas del inicio</h2>
+        <div class="hint">Los 3 números que aparecen bajo el titular principal.</div>
+        <div class="form-grid">
+          <div class="field"><label>Estadística 1 — valor</label><input type="text" id="s1_valor" placeholder="+1.200"></div>
+          <div class="field"><label>Estadística 1 — etiqueta</label><input type="text" id="s1_etiqueta" placeholder="Clientes felices"></div>
+          <div class="field"><label>Estadística 2 — valor</label><input type="text" id="s2_valor" placeholder="4.9/5"></div>
+          <div class="field"><label>Estadística 2 — etiqueta</label><input type="text" id="s2_etiqueta" placeholder="Calificación promedio"></div>
+          <div class="field"><label>Estadística 3 — valor</label><input type="text" id="s3_valor" placeholder="100%"></div>
+          <div class="field"><label>Estadística 3 — etiqueta</label><input type="text" id="s3_etiqueta" placeholder="Piezas hipoalergénicas"></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* Estado en memoria (no se usa localStorage: este panel funciona por
+   importación/exportación de archivos JSON, que es lo que de verdad
+   actualiza tu sitio publicado). */
+let PRODUCTS = [];
+let CONFIG = {
+  whatsappNumero:"573000000000", whatsappMensaje:"Hola White Glow, quiero más información",
+  anuncio:"Envíos a toda Colombia · Empaques de regalo sin costo · Paga contraentrega",
+  ciudad:"Medellín, Colombia", instagram:"", tiktok:"",
+  estadisticas:[{valor:"+1.200",etiqueta:"Clientes felices"},{valor:"4.9/5",etiqueta:"Calificación promedio"},{valor:"100%",etiqueta:"Piezas hipoalergénicas"}]
+};
+let editingId = null;
+
+function toast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(toast._h);
+  toast._h = setTimeout(()=>t.classList.remove("show"), 2600);
+}
+function uid(){ return "p" + Math.random().toString(36).slice(2,9); }
+function download(filename, dataStr){
+  const blob = new Blob([dataStr], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = filename; a.click();
+  URL.revokeObjectURL(url);
+}
+function formatCOP(n){ return "$" + Number(n||0).toLocaleString("es-CO") + " COP"; }
+
+/* ---------- Tabs ---------- */
+document.querySelectorAll(".tabbtn").forEach(b=>{
+  b.addEventListener("click", ()=>{
+    document.querySelectorAll(".tabbtn").forEach(x=>x.classList.remove("active"));
+    document.querySelectorAll(".panel").forEach(x=>x.classList.remove("active"));
+    b.classList.add("active");
+    document.getElementById("panel-"+b.dataset.panel).classList.add("active");
+  });
+});
+
+/* ---------- Render tabla de productos ---------- */
+function renderTable(){
+  const body = document.getElementById("productTableBody");
+  const empty = document.getElementById("productEmpty");
+  document.getElementById("productCount").textContent = `Productos (${PRODUCTS.length})`;
+  if(PRODUCTS.length === 0){ body.innerHTML=""; empty.style.display="block"; return; }
+  empty.style.display="none";
+  body.innerHTML = PRODUCTS.map(p => `
+    <tr>
+      <td><img src="${p.imagen||''}" alt=""></td>
+      <td><b>${p.nombre}</b><br><span class="tag">${p.etiqueta||""}</span></td>
+      <td>${p.categoria==="joyeria"?"Joyería":"Skincare"}</td>
+      <td>${formatCOP(p.precio)}</td>
+      <td>${p.activo!==false ? '<span class="status-on">● Visible</span>' : '<span class="status-off">○ Oculto</span>'}</td>
+      <td>
+        <div class="row-actions">
+          <button class="btn btn-sm" data-edit="${p.id}">Editar</button>
+          <button class="btn btn-sm" data-toggle="${p.id}">${p.activo!==false?"Ocultar":"Mostrar"}</button>
+          <button class="btn btn-sm btn-danger" data-del="${p.id}">Eliminar</button>
+        </div>
+      </td>
+    </tr>
+  `).join("");
+
+  body.querySelectorAll("[data-edit]").forEach(btn=>btn.addEventListener("click",()=>openForm(btn.dataset.edit)));
+  body.querySelectorAll("[data-toggle]").forEach(btn=>btn.addEventListener("click",()=>{
+    const p = PRODUCTS.find(x=>x.id===btn.dataset.toggle);
+    p.activo = p.activo===false ? true : false;
+    renderTable();
+  }));
+  body.querySelectorAll("[data-del]").forEach(btn=>btn.addEventListener("click",()=>{
+    if(confirm("¿Eliminar este producto del catálogo?")){
+      PRODUCTS = PRODUCTS.filter(x=>x.id!==btn.dataset.del);
+      renderTable();
+      toast("Producto eliminado");
+    }
+  }));
+}
+
+/* ---------- Formulario producto ---------- */
+const formCard = document.getElementById("productFormCard");
+function openForm(id){
+  editingId = id || null;
+  const p = id ? PRODUCTS.find(x=>x.id===id) : null;
+  document.getElementById("productFormTitle").textContent = p ? "Editar producto" : "Nuevo producto";
+  document.getElementById("f_nombre").value = p?.nombre || "";
+  document.getElementById("f_categoria").value = p?.categoria || "joyeria";
+  document.getElementById("f_etiqueta").value = p?.etiqueta || "";
+  document.getElementById("f_imagen").value = p?.imagen || "";
+  document.getElementById("f_precio").value = p?.precio ?? "";
+  document.getElementById("f_precioAnterior").value = p?.precioAnterior ?? "";
+  document.getElementById("f_calificacion").value = p?.calificacion ?? "4.8";
+  document.getElementById("f_resenas").value = p?.resenas ?? "0";
+  document.getElementById("f_activo").checked = p ? p.activo!==false : true;
+  document.getElementById("f_preview").src = p?.imagen || "";
+  formCard.style.display = "block";
+  formCard.scrollIntoView({behavior:"smooth", block:"center"});
+}
+document.getElementById("f_imagen").addEventListener("input", e=>{
+  document.getElementById("f_preview").src = e.target.value;
+});
+document.getElementById("btnNewProduct").addEventListener("click", ()=>openForm(null));
+document.getElementById("btnCancelProduct").addEventListener("click", ()=>{ formCard.style.display="none"; });
+document.getElementById("btnSaveProduct").addEventListener("click", ()=>{
+  const nombre = document.getElementById("f_nombre").value.trim();
+  if(!nombre){ toast("Ponle un nombre al producto"); return; }
+  const data = {
+    id: editingId || uid(),
+    activo: document.getElementById("f_activo").checked,
+    categoria: document.getElementById("f_categoria").value,
+    etiqueta: document.getElementById("f_etiqueta").value.trim(),
+    nombre,
+    precio: Number(document.getElementById("f_precio").value || 0),
+    precioAnterior: document.getElementById("f_precioAnterior").value ? Number(document.getElementById("f_precioAnterior").value) : null,
+    calificacion: Number(document.getElementById("f_calificacion").value || 0),
+    resenas: Number(document.getElementById("f_resenas").value || 0),
+    imagen: document.getElementById("f_imagen").value.trim()
+  };
+  if(editingId){
+    PRODUCTS = PRODUCTS.map(p => p.id===editingId ? data : p);
+    toast("Producto actualizado");
+  } else {
+    PRODUCTS.push(data);
+    toast("Producto agregado");
+  }
+  formCard.style.display = "none";
+  renderTable();
+});
+
+/* ---------- Cargar / importar / descargar productos ---------- */
+async function loadLive(){
+  try{
+    const res = await fetch("productos.json", {cache:"no-store"});
+    if(!res.ok) throw new Error();
+    PRODUCTS = await res.json();
+    renderTable();
+    toast("Catálogo cargado desde el sitio");
+  }catch(e){
+    toast("No se pudo cargar (¿el panel está en el mismo hosting que el sitio?). Usa 'Importar productos.json'.");
+  }
+}
+document.getElementById("btnLoadLive").addEventListener("click", loadLive);
+document.getElementById("fileImportProducts").addEventListener("change", e=>{
+  const file = e.target.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ()=>{
+    try{ PRODUCTS = JSON.parse(reader.result); renderTable(); toast("Catálogo importado"); }
+    catch(err){ toast("Ese archivo no es un JSON válido"); }
+  };
+  reader.readAsText(file);
+});
+document.getElementById("btnDownloadProducts").addEventListener("click", ()=>{
+  download("productos.json", JSON.stringify(PRODUCTS, null, 2));
+  toast("Descargado: sube este archivo a tu hosting");
+});
+
+/* ---------- Configuración ---------- */
+function fillConfigForm(){
+  document.getElementById("c_whatsappNumero").value = CONFIG.whatsappNumero || "";
+  document.getElementById("c_whatsappMensaje").value = CONFIG.whatsappMensaje || "";
+  document.getElementById("c_anuncio").value = CONFIG.anuncio || "";
+  document.getElementById("c_ciudad").value = CONFIG.ciudad || "";
+  document.getElementById("c_instagram").value = CONFIG.instagram || "";
+  document.getElementById("c_tiktok").value = CONFIG.tiktok || "";
+  const st = CONFIG.estadisticas || [];
+  document.getElementById("s1_valor").value = st[0]?.valor || "";
+  document.getElementById("s1_etiqueta").value = st[0]?.etiqueta || "";
+  document.getElementById("s2_valor").value = st[1]?.valor || "";
+  document.getElementById("s2_etiqueta").value = st[1]?.etiqueta || "";
+  document.getElementById("s3_valor").value = st[2]?.valor || "";
+  document.getElementById("s3_etiqueta").value = st[2]?.etiqueta || "";
+}
+function readConfigForm(){
+  CONFIG = {
+    whatsappNumero: document.getElementById("c_whatsappNumero").value.trim(),
+    whatsappMensaje: document.getElementById("c_whatsappMensaje").value.trim(),
+    anuncio: document.getElementById("c_anuncio").value.trim(),
+    ciudad: document.getElementById("c_ciudad").value.trim(),
+    instagram: document.getElementById("c_instagram").value.trim(),
+    tiktok: document.getElementById("c_tiktok").value.trim(),
+    estadisticas: [
+      {valor:document.getElementById("s1_valor").value.trim(), etiqueta:document.getElementById("s1_etiqueta").value.trim()},
+      {valor:document.getElementById("s2_valor").value.trim(), etiqueta:document.getElementById("s2_etiqueta").value.trim()},
+      {valor:document.getElementById("s3_valor").value.trim(), etiqueta:document.getElementById("s3_etiqueta").value.trim()}
+    ]
+  };
+}
+async function loadLiveConfig(){
+  try{
+    const res = await fetch("config.json", {cache:"no-store"});
+    if(!res.ok) throw new Error();
+    CONFIG = await res.json();
+    fillConfigForm();
+    toast("Configuración cargada desde el sitio");
+  }catch(e){
+    toast("No se pudo cargar (¿el panel está en el mismo hosting que el sitio?). Usa 'Importar config.json'.");
+  }
+}
+document.getElementById("btnLoadLiveConfig").addEventListener("click", loadLiveConfig);
+document.getElementById("fileImportConfig").addEventListener("change", e=>{
+  const file = e.target.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ()=>{
+    try{ CONFIG = JSON.parse(reader.result); fillConfigForm(); toast("Configuración importada"); }
+    catch(err){ toast("Ese archivo no es un JSON válido"); }
+  };
+  reader.readAsText(file);
+});
+document.getElementById("btnDownloadConfig").addEventListener("click", ()=>{
+  readConfigForm();
+  download("config.json", JSON.stringify(CONFIG, null, 2));
+  toast("Descargado: sube este archivo a tu hosting");
+});
+
+/* ---------- Inicial: intenta cargar lo que ya está publicado ---------- */
+fillConfigForm();
+loadLive();
+loadLiveConfig();
+</script>
+</body>
+</html>

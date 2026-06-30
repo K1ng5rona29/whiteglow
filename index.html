@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>White Glow — Joyería & Skincare</title>
+<meta name="description" content="White Glow: joyería fina (incluye pulseras de oro laminado 18K) y skincare consciente, para ellas y para ellos. El brillo que llevas puesto, el brillo que cuidas. Envíos a toda Colombia.">
+<meta property="og:title" content="White Glow — Joyería & Skincare">
+<meta property="og:description" content="Joyería fina y skincare consciente para tu rutina de todos los días. Para ellas y para ellos.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/logo-large.png">
+
+<!-- ===== Favicon (logo del águila White Glow) ===== -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
+<link rel="shortcut icon" href="assets/favicon.ico">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,400;1,6..96,500&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   WHITE GLOW — hoja de estilos
+   ------------------------------------------------------------
+   Para cambiar colores o tipografía, edita las variables de
+   aquí abajo (:root). Para cambiar productos, número de
+   WhatsApp, anuncio, etc. usa el Panel de administración
+   (admin.html) — no hace falta tocar este archivo.
+   ============================================================ */
+:root{
+  --ink:#15201A; --ink-soft:#1E2C23;
+  --gold:#BE9A4D; --gold-light:#E4C988;
+  --moss:#4B5D43; --moss-light:#8B9B7E;
+  --ivory:#FAF7EF; --ivory-deep:#F1EAD9;
+  --text:#20251D; --text-soft:#5C6356;
+  --line: rgba(21,32,26,0.13);
+  --max:1180px;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--ivory); color:var(--text);
+  font-family:'Work Sans', sans-serif; font-weight:400; line-height:1.6;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+h1,h2,h3,.serif{ font-family:'Bodoni Moda', serif; font-weight:500; line-height:1.05; letter-spacing:0.002em; }
+a{color:inherit; text-decoration:none;}
+img{max-width:100%; display:block;}
+button{font-family:inherit;}
+.wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
+.eyebrow{ font-size:11.5px; letter-spacing:0.24em; text-transform:uppercase; color:var(--gold); font-weight:600; }
+.eyebrow.moss{ color:var(--moss); }
+::selection{ background:var(--gold-light); color:var(--ink); }
+:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+
+.chain-divider{
+  height:18px; margin:0 auto; max-width:340px;
+  background-image: radial-gradient(circle, var(--gold) 1.6px, transparent 1.7px);
+  background-size:22px 18px; background-repeat:repeat-x; background-position:center; opacity:0.6;
+}
+.chain-divider.on-dark{ background-image: radial-gradient(circle, var(--gold-light) 1.6px, transparent 1.7px); opacity:0.7;}
+
+.announce{ background:var(--ink); color:var(--ivory-deep); text-align:center; font-size:12.5px; letter-spacing:0.07em; padding:10px 16px; }
+.announce span{ color: var(--gold-light); }
+
+header{ position:sticky; top:0; z-index:100; background:rgba(250,247,239,0.92); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+nav.wrap{ display:flex; align-items:center; justify-content:space-between; height:84px; }
+.logo{ font-family:'Bodoni Moda', serif; font-size:23px; letter-spacing:0.01em; display:flex; align-items:center; gap:11px; white-space:nowrap; }
+.logo img{ width:42px; height:42px; object-fit:contain; display:block; }
+.nav-links{ display:flex; gap:36px; font-size:14px; letter-spacing:0.03em; }
+.nav-links a{ position:relative; padding:4px 0; }
+.nav-links a::after{ content:''; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--gold); transition:width .3s ease; }
+.nav-links a:hover::after{ width:100%; }
+.nav-cta{ display:flex; align-items:center; gap:16px; }
+.btn{ display:inline-flex; align-items:center; gap:8px; padding:13px 26px; font-size:13px; letter-spacing:0.06em; text-transform:uppercase; border-radius:2px; border:1px solid var(--ink); transition:all .25s ease; cursor:pointer; white-space:nowrap; }
+.btn-dark{ background:var(--ink); color:var(--ivory); }
+.btn-dark:hover{ background:var(--gold); border-color:var(--gold); color:var(--ink); }
+.btn-ghost{ background:transparent; color:var(--ink); }
+.btn-ghost:hover{ background:var(--ink); color:var(--ivory); }
+.btn-gold{ background:var(--gold); border-color:var(--gold); color:var(--ink); }
+.btn-gold:hover{ background:var(--ink); border-color:var(--ink); color:var(--ivory); }
+.btn-on-dark{ border-color:var(--gold-light); color:var(--ivory); }
+.btn-on-dark:hover{ background:var(--gold-light); color:var(--ink); border-color:var(--gold-light); }
+.menu-toggle{ display:none; background:none; border:none; cursor:pointer; padding:6px; color:var(--ink); }
+
+.hero{ position:relative; background:var(--ink); color:var(--ivory); padding:88px 0 0; overflow:hidden; }
+.hero-glow{ position:absolute; border-radius:50%; filter:blur(90px); opacity:0.4; z-index:0; background:radial-gradient(circle, var(--gold), transparent 70%); width:560px; height:560px; top:-220px; right:-160px; animation:drift 16s ease-in-out infinite alternate; }
+.hero-glow.moss{ background:radial-gradient(circle, var(--moss-light), transparent 70%); width:420px; height:420px; left:-160px; bottom:-160px; top:auto; right:auto; opacity:0.28; animation-duration:20s; }
+@keyframes drift{ from{ transform:translate(0,0);} to{ transform:translate(-40px, 50px);} }
+.hero-grid{ position:relative; z-index:1; display:grid; grid-template-columns:1fr 0.92fr; gap:56px; align-items:center; padding-bottom:64px; }
+.hero .eyebrow{ color:var(--gold-light); }
+.hero h1{ font-size:clamp(40px, 5vw, 66px); margin:18px 0 22px; color:var(--ivory); }
+.hero h1 em{ font-style:italic; color:var(--gold-light); }
+.hero p.lead{ max-width:430px; font-size:16.5px; color:#D8D6C9; margin-bottom:32px; }
+.hero-ctas{ display:flex; gap:14px; flex-wrap:wrap; }
+.hero-stats{ display:flex; gap:38px; margin-top:48px; padding-top:26px; border-top:1px solid rgba(250,247,239,0.16); }
+.hero-stats div b{ font-family:'Bodoni Moda',serif; font-size:25px; display:block; color:var(--gold-light); }
+.hero-stats div span{ font-size:12px; letter-spacing:0.03em; color:#A9A89A; }
+.hero-visual{ position:relative; aspect-ratio:0.92/1; display:flex; align-items:center; justify-content:center; }
+.hero-emblem{ position:relative; width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
+.hero-emblem::before{
+  content:''; position:absolute; width:78%; height:78%; border-radius:50%;
+  background:radial-gradient(circle, rgba(228,201,136,0.16), transparent 72%);
+  filter:blur(6px);
+}
+.hero-emblem img{ position:relative; width:88%; max-width:480px; filter:drop-shadow(0 30px 60px rgba(0,0,0,0.5)); animation:float 7s ease-in-out infinite; }
+@keyframes float{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-14px);} }
+.hero-emblem .ring{
+  position:absolute; border:1px solid rgba(228,201,136,0.18); border-radius:50%;
+  width:96%; height:96%;
+}
+.hero-bottom-divider{ position:relative; z-index:1; padding:18px 0 26px; }
+
+.section-head{ text-align:center; max-width:600px; margin:0 auto 52px; }
+.section-head h2{ font-size:clamp(30px,3.3vw,44px); margin-top:14px; color:var(--text); }
+.section-head p{ color:var(--text-soft); margin-top:14px; font-size:15.5px; }
+.section-head.on-dark h2, .section-head.on-dark p{ color:var(--ivory); }
+.section-head.on-dark p{ color:#C9C7B9; }
+
+section{ padding:90px 0; }
+.section-tight{ padding:60px 0; }
+
+.trust-strip{ background:var(--ivory-deep); padding:0; }
+.trust{ display:grid; grid-template-columns:repeat(4,1fr); }
+.trust-item{ display:flex; flex-direction:column; gap:6px; align-items:center; text-align:center; padding:32px 18px; border-right:1px solid var(--line); }
+.trust-item:last-child{ border-right:none; }
+.trust-item svg{ width:24px; height:24px; stroke:var(--gold); margin-bottom:4px; }
+.trust-item b{ font-size:13.5px; letter-spacing:0.02em; }
+.trust-item span{ font-size:12.5px; color:var(--text-soft); }
+
+.categories{ display:grid; grid-template-columns:1fr 1fr; gap:26px; }
+.cat-card{ position:relative; height:500px; border-radius:3px; overflow:hidden; display:block; cursor:pointer; }
+.cat-card img{ width:100%; height:100%; object-fit:cover; transition:transform .8s ease; }
+.cat-card:hover img{ transform:scale(1.06); }
+.cat-card::after{ content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(21,32,26,0) 38%, rgba(21,32,26,0.85) 100%); }
+.cat-content{ position:absolute; left:0; right:0; bottom:0; padding:34px; z-index:2; color:var(--ivory); }
+.cat-content .eyebrow{ color:var(--gold-light); }
+.cat-content h3{ font-size:32px; color:var(--ivory); margin:8px 0 16px; }
+.cat-content .cat-link{ display:inline-flex; align-items:center; gap:8px; font-size:12.5px; letter-spacing:0.1em; text-transform:uppercase; border-bottom:1px solid var(--gold-light); padding-bottom:4px; color:var(--ivory); }
+.cat-card:hover .cat-link{ color:var(--gold-light); }
+
+.tabs{ display:flex; justify-content:center; gap:10px; margin-bottom:48px; }
+.tab-btn{ padding:11px 28px; border:1px solid var(--line); border-radius:30px; font-size:13px; letter-spacing:0.04em; background:transparent; cursor:pointer; transition:all .25s ease; color:var(--text); }
+.tab-btn.active, .tab-btn:hover{ background:var(--ink); color:var(--ivory); border-color:var(--ink); }
+
+.product-grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:24px; }
+.product-card{ background:#fff; border:1px solid var(--line); border-radius:3px; overflow:hidden; transition:box-shadow .3s ease, transform .3s ease; }
+.product-card:hover{ box-shadow:0 26px 55px -28px rgba(21,32,26,0.35); transform:translateY(-4px); }
+.product-img{ aspect-ratio:1/1; overflow:hidden; background:var(--ivory-deep); }
+.product-img img{ width:100%; height:100%; object-fit:cover; }
+.product-info{ padding:20px 20px 22px; }
+.product-info .eyebrow{ font-size:10.5px; }
+.product-info h4{ font-family:'Bodoni Moda',serif; font-weight:500; font-size:19px; margin:6px 0 8px; }
+.p-rating{ display:flex; align-items:center; gap:6px; font-size:12.5px; color:var(--text-soft); margin-bottom:10px; }
+.p-rating .stars{ color:var(--gold); letter-spacing:1px; font-size:12px; }
+.price{ font-family:'Bodoni Moda',serif; font-size:17px; margin-bottom:14px; }
+.price .old-price{ font-family:'Work Sans',sans-serif; font-size:13px; color:#9A9384; text-decoration:line-through; margin-left:8px; }
+.buy-btn{ display:flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:12px; background:var(--ink); color:var(--ivory); font-size:12.5px; letter-spacing:0.06em; text-transform:uppercase; border-radius:2px; transition:background .25s ease; }
+.buy-btn:hover{ background:#0F1A12; }
+.buy-btn svg{ width:15px; height:15px; fill:#25D366; }
+.empty-state{ text-align:center; padding:60px 20px; color:var(--text-soft); font-size:14.5px; grid-column:1/-1; }
+
+.process{ background:var(--ivory-deep); }
+.process-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:30px; counter-reset:step; }
+.process-step{ position:relative; padding:36px 28px; background:#fff; border:1px solid var(--line); }
+.process-step .num{ font-family:'Bodoni Moda',serif; font-size:42px; color:var(--gold); opacity:0.55; margin-bottom:14px; line-height:1; }
+.process-step h4{ font-family:'Bodoni Moda',serif; font-size:20px; margin-bottom:10px; }
+.process-step p{ font-size:14.5px; color:var(--text-soft); }
+
+.story-grid{ display:grid; grid-template-columns:0.85fr 1fr; gap:64px; align-items:center; }
+.story-img{ position:relative; aspect-ratio:4/5; border-radius:3px; overflow:hidden; background:var(--ink); display:flex; align-items:center; justify-content:center; }
+.story-img img.emblem{ width:60%; filter:drop-shadow(0 20px 40px rgba(0,0,0,0.5)); }
+.story h2{ margin-top:14px; font-size:clamp(28px,3vw,38px); }
+.story p{ color:var(--text-soft); margin-top:16px; font-size:15.5px; max-width:480px; }
+.story-values{ display:flex; flex-direction:column; gap:18px; margin-top:30px; }
+.story-values div{ display:flex; gap:14px; align-items:flex-start; }
+.story-values div::before{ content:''; flex:none; width:7px; height:7px; border-radius:50%; background:var(--gold); margin-top:8px; }
+.story-values b{ display:block; font-size:14.5px; }
+.story-values span{ font-size:13.5px; color:var(--text-soft); }
+
+.testimonials{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+.t-card{ background:#fff; border:1px solid var(--line); padding:30px; border-radius:3px; }
+.t-stars{ color:var(--gold); font-size:13px; letter-spacing:1px; margin-bottom:14px; }
+.t-card p{ font-size:14.5px; color:var(--text); line-height:1.65; min-height:96px; }
+.t-product{ font-size:11.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--moss); margin:16px 0 14px; }
+.t-who{ display:flex; align-items:center; gap:12px; padding-top:14px; border-top:1px solid var(--line); }
+.t-avatar{ width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:12.5px; font-weight:600; }
+.t-who b{ display:block; font-size:13.5px; }
+.t-who span{ font-size:12px; color:var(--text-soft); }
+
+.contact{ background:var(--ink); color:var(--ivory); text-align:center; padding:78px 32px; border-radius:3px; position:relative; overflow:hidden; }
+.contact .hero-glow{ opacity:0.3; }
+.contact-inner{ position:relative; z-index:1; }
+.contact .eyebrow{ color:var(--gold-light); }
+.contact h2{ font-size:clamp(28px,3.4vw,42px); margin:14px 0 16px; color:var(--ivory); }
+.contact p{ color:#D2D0C2; max-width:480px; margin:0 auto 30px; font-size:15.5px; }
+.contact-actions{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+
+footer{ background:var(--ivory-deep); padding:64px 0 0; }
+.footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; padding-bottom:48px; }
+.footer-grid .logo{ margin-bottom:14px; }
+.footer-grid p{ font-size:13.5px; color:var(--text-soft); max-width:280px; }
+.footer-grid h5{ font-size:12.5px; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:18px; color:var(--text-soft); }
+.footer-grid ul{ list-style:none; display:flex; flex-direction:column; gap:11px; font-size:14px; }
+.footer-grid ul a:hover{ color:var(--gold); }
+.social-row{ display:flex; gap:10px; margin-top:18px; }
+.social-row a{ width:36px; height:36px; border:1px solid var(--line); border-radius:50%; display:flex; align-items:center; justify-content:center; transition:all .25s ease; }
+.social-row a:hover{ background:var(--ink); border-color:var(--ink); color:var(--ivory); }
+.social-row svg{ width:16px; height:16px; }
+.footer-bottom{ display:flex; justify-content:space-between; align-items:center; padding:24px 0; border-top:1px solid var(--line); font-size:12px; color:var(--text-soft); flex-wrap:wrap; gap:10px; }
+.footer-bottom a{ opacity:0.55; transition:opacity .2s ease; }
+.footer-bottom a:hover{ opacity:1; color:var(--gold); }
+
+.wa-float{ position:fixed; bottom:24px; right:24px; z-index:200; width:58px; height:58px; border-radius:50%; background:#25D366; display:flex; align-items:center; justify-content:center; box-shadow:0 14px 32px -10px rgba(0,0,0,0.45); transition:transform .25s ease; }
+.wa-float:hover{ transform:scale(1.08); }
+.wa-float svg{ width:30px; height:30px; }
+
+.reveal{ opacity:1; transform:none; animation:fadeUp .6s ease both; }
+@keyframes fadeUp{ from{ opacity:0; transform:translateY(14px);} to{ opacity:1; transform:translateY(0);} }
+@media (prefers-reduced-motion: reduce){ .reveal{ opacity:1; transform:none; animation:none; } .hero-glow{ animation:none; } .hero-emblem img{ animation:none; } }
+
+.mobile-panel{ display:none; position:absolute; top:100%; left:0; right:0; background:var(--ivory); border-bottom:1px solid var(--line); flex-direction:column; padding:20px 32px 28px; gap:18px; }
+.mobile-panel.open{ display:flex; }
+.mobile-panel a{ font-size:15.5px; }
+
+@media (max-width: 980px){
+  .hero-grid{ grid-template-columns:1fr; }
+  .hero-visual{ max-width:360px; margin:8px auto 0; }
+  .categories{ grid-template-columns:1fr; }
+  .product-grid{ grid-template-columns:repeat(2,1fr); }
+  .process-grid{ grid-template-columns:1fr; }
+  .story-grid{ grid-template-columns:1fr; }
+  .trust{ grid-template-columns:repeat(2,1fr); }
+  .trust-item:nth-child(2){ border-right:none; }
+  .testimonials{ grid-template-columns:1fr; }
+  .footer-grid{ grid-template-columns:1fr 1fr; }
+}
+@media (max-width: 760px){
+  .logo{ font-size:19px; }
+  .nav-links, .nav-cta .btn-ghost{ display:none; }
+  .menu-toggle{ display:block; }
+  nav.wrap{ height:72px; }
+  .hero{ padding-top:54px; }
+  section{ padding:60px 0; }
+  .section-tight{ padding:44px 0; }
+  .product-grid{ grid-template-columns:1fr 1fr; gap:14px; }
+  .trust{ grid-template-columns:1fr 1fr; }
+  .contact{ padding:54px 24px; }
+  .footer-grid{ grid-template-columns:1fr; gap:30px; }
+  .hero-stats{ gap:22px; }
+  .story-values div{ flex-direction:column; gap:4px; }
+  .story-values div::before{ margin-top:2px; }
+}
+</style>
+</head>
+<body>
+
+<div class="announce" id="announceBar">✨ Envíos a toda Colombia &nbsp;<span>·</span>&nbsp; Empaques de regalo sin costo &nbsp;<span>·</span>&nbsp; Paga contraentrega</div>
+
+<header>
+  <nav class="wrap">
+    <a href="#inicio" class="logo"><img src="assets/logo-header.png" alt="White Glow"> White Glow</a>
+    <div class="nav-links">
+      <a href="#inicio">Inicio</a>
+      <a href="#joyeria">Joyería</a>
+      <a href="#skincare">Skincare</a>
+      <a href="#nosotras">Quiénes somos</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#contacto" class="btn btn-ghost">Contacto</a>
+      <a href="#" id="navWhatsapp" target="_blank" class="btn btn-dark">Escríbenos</a>
+      <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false" id="menuToggle">
+        <svg class="icon-burger" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="display:none"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
+    </div>
+    <div class="mobile-panel" id="mobilePanel">
+      <a href="#inicio">Inicio</a>
+      <a href="#joyeria">Joyería</a>
+      <a href="#skincare">Skincare</a>
+      <a href="#nosotras">Quiénes somos</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="inicio">
+  <div class="hero-glow"></div>
+  <div class="hero-glow moss"></div>
+  <div class="wrap hero-grid">
+    <div class="reveal">
+      <div class="eyebrow">Joyería fina · Skincare consciente · Para ellas y ellos</div>
+      <h1>El brillo que <em>llevas puesto.</em><br>El brillo que <em>cuidas.</em></h1>
+      <p class="lead">White Glow combina piezas de joyería delicadas —incluyendo pulseras de oro laminado 18K— con rituales de skincare pensados para resaltar tu brillo natural, todos los días. Para ellas y para ellos.</p>
+      <div class="hero-ctas">
+        <a href="#joyeria" class="btn btn-gold">Ver joyería</a>
+        <a href="#skincare" class="btn btn-on-dark">Ver skincare</a>
+      </div>
+      <div class="hero-stats" id="heroStats"></div>
+    </div>
+    <div class="hero-visual reveal">
+      <div class="hero-emblem">
+        <div class="ring"></div>
+        <img src="assets/logo-large.png" alt="Águila White Glow">
+      </div>
+    </div>
+  </div>
+  <div class="hero-bottom-divider"><div class="chain-divider on-dark"></div></div>
+</section>
+
+<!-- ===== TRUST STRIP ===== -->
+<section class="trust-strip section-tight" style="padding-top:0; padding-bottom:0;">
+  <div class="wrap">
+    <div class="trust reveal">
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 7h18M5 7l1.5 12h11L19 7M9 7V5a3 3 0 016 0v2"/></svg>
+        <b>Envío a todo el país</b>
+        <span>Coordinado por Servientrega</span>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+        <b>Calidad garantizada</b>
+        <span>Piezas hipoalergénicas</span>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/></svg>
+        <b>Paga como prefieras</b>
+        <span>Contraentrega o transferencia</span>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+        <b>Atención personalizada</b>
+        <span>Respuesta directa por WhatsApp</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CATEGORÍAS ===== -->
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Explora</div>
+      <h2>Dos mundos, un solo brillo</h2>
+      <p>Piezas para realzar tu estilo y fórmulas para cuidar la piel que las lleva.</p>
+    </div>
+    <div class="categories">
+      <a href="#productos" class="cat-card reveal" data-cat="joyeria">
+        <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=80" alt="Colección de joyería White Glow">
+        <div class="cat-content">
+          <div class="eyebrow">Colección</div>
+          <h3>Joyería</h3>
+          <span class="cat-link">Explorar piezas →</span>
+        </div>
+      </a>
+      <a href="#productos" class="cat-card reveal" data-cat="skincare">
+        <img src="https://images.unsplash.com/photo-1748543668676-ea8241cb3886?auto=format&fit=crop&w=900&q=80" alt="Colección de skincare White Glow">
+        <div class="cat-content">
+          <div class="eyebrow">Ritual</div>
+          <h3>Skincare</h3>
+          <span class="cat-link">Explorar fórmulas →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="chain-divider"></div>
+
+<!-- ===== PRODUCTOS (renderizados desde productos.json) ===== -->
+<section id="productos">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Catálogo</div>
+      <h2>Lo más amado</h2>
+      <p>Selecciona una categoría y escríbenos por WhatsApp para apartar tu pieza o producto.</p>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="joyeria">Joyería</button>
+      <button class="tab-btn" data-tab="skincare">Skincare</button>
+    </div>
+
+    <div class="product-grid" id="productGrid">
+      <div class="empty-state">Cargando catálogo…</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROCESO ===== -->
+<section class="process">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow moss">Cómo funciona</div>
+      <h2>Comprar es así de simple</h2>
+    </div>
+    <div class="process-grid">
+      <div class="process-step reveal">
+        <div class="num">01</div>
+        <h4>Explora</h4>
+        <p>Mira el catálogo de joyería y skincare, y elige las piezas o fórmulas que más te gusten.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="num">02</div>
+        <h4>Escríbenos</h4>
+        <p>Toca "Comprar" y te llevamos directo a WhatsApp con tu pedido ya armado. Resolvemos tus dudas al instante.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="num">03</div>
+        <h4>Recibe en casa</h4>
+        <p>Coordinamos envío a todo el país. Pagas contraentrega o por transferencia, como prefieras.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== QUIÉNES SOMOS ===== -->
+<section class="story" id="nosotras">
+  <div class="wrap story-grid">
+    <div class="story-img reveal">
+      <img class="emblem" src="assets/logo-large.png" alt="White Glow, nuestra historia">
+    </div>
+    <div class="reveal">
+      <div class="eyebrow">Nuestra historia</div>
+      <h2>Creemos que el brillo se construye, no se finge</h2>
+      <p>White Glow nació de una idea simple: la joyería que usas y la piel que la lleva merecen el mismo nivel de cuidado. Seleccionamos piezas hipoalergénicas y fórmulas con ingredientes activos reales, pensadas para quienes quieren verse —y sentirse— bien todos los días, sin importar el género.</p>
+      <p>Cada pieza y cada producto pasa por nuestras manos antes de llegar a las tuyas.</p>
+      <div class="story-values">
+        <div><b>Curado a mano</b><span>Seleccionamos cada producto personalmente</span></div>
+        <div><b>Oro laminado 18K</b><span>Pulseras y piezas con baño de calidad, para ellas y ellos</span></div>
+        <div><b>Piel primero</b><span>Fórmulas dermatológicamente probadas</span></div>
+        <div><b>Hecho para durar</b><span>Acabados que no pierden el brillo</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIOS ===== -->
+<section style="background:var(--ivory-deep);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Lo que dicen</div>
+      <h2>Clientes que ya brillan</h2>
+      <p>Reseñas reales de pedidos entregados. Sin filtros, sin actores.</p>
+    </div>
+    <div class="testimonials">
+      <div class="t-card reveal">
+        <div class="t-stars">★★★★★</div>
+        <p>El anillo Aura llegó perfecto, justo como en las fotos. Lo pedí por WhatsApp un miércoles y el sábado ya lo tenía puesto.</p>
+        <div class="t-product">Anillo Aura</div>
+        <div class="t-who"><div class="t-avatar" style="background:#BE9A4D">MJ</div><div><b>María José R.</b><span>Bogotá · Joyería</span></div></div>
+      </div>
+      <div class="t-card reveal">
+        <div class="t-stars">★★★★★</div>
+        <p>Tengo piel mixta y casi todo me brota, pero llevo usando el sérum mes y medio sin problema. El tono se ve más parejo y me resolvieron todas mis dudas antes de comprar.</p>
+        <div class="t-product">Sérum Glow C</div>
+        <div class="t-who"><div class="t-avatar" style="background:#4B5D43">AG</div><div><b>Andrés Gómez</b><span>Cali · Skincare</span></div></div>
+      </div>
+      <div class="t-card reveal">
+        <div class="t-stars">★★★★★</div>
+        <p>Compré la Cadena Lumière de regalo y llegó en un empaque precioso, sin costo extra. La atención por WhatsApp fue súper rápida.</p>
+        <div class="t-product">Cadena Lumière</div>
+        <div class="t-who"><div class="t-avatar" style="background:#8B9B7E">CD</div><div><b>Camila D.</b><span>Medellín · Joyería</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACTO ===== -->
+<section id="contacto">
+  <div class="wrap">
+    <div class="contact reveal">
+      <div class="hero-glow"></div>
+      <div class="contact-inner">
+        <div class="eyebrow">Hablemos</div>
+        <h2>¿Buscas tu brillo?</h2>
+        <p>Escríbenos por WhatsApp para asesoría personalizada, disponibilidad de piezas o pedidos al por mayor.</p>
+        <div class="contact-actions">
+          <a href="#" id="contactWhatsapp" target="_blank" class="btn btn-gold">Escribir por WhatsApp</a>
+          <a href="#productos" class="btn btn-on-dark">Ver catálogo</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a href="#inicio" class="logo"><img src="assets/logo-header.png" alt="White Glow"> White Glow</a>
+        <p>Joyería fina (incluye pulseras de oro laminado 18K) y skincare consciente, para ellas y para ellos. El brillo que llevas puesto, el brillo que cuidas.</p>
+        <div class="social-row">
+          <a href="#" id="footerInstagram" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+          <a href="#" id="footerTiktok" target="_blank" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 3c.4 2.2 1.8 3.7 4 4v3c-1.5 0-2.9-.4-4-1.3v6.6A5.7 5.7 0 1110.3 9.6v3.1a2.6 2.6 0 102.1 2.6V3H16z"/></svg></a>
+          <a href="#" id="footerWhatsapp" target="_blank" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.2-1.3c1.4.8 3.1 1.3 4.8 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.18 8.18 0 013.8 12 8.2 8.2 0 1112 20.2z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h5>Navegación</h5>
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#joyeria">Joyería</a></li>
+          <li><a href="#skincare">Skincare</a></li>
+          <li><a href="#nosotras">Quiénes somos</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Ayuda</h5>
+        <ul>
+          <li><a href="#contacto">Contacto</a></li>
+          <li><a href="#">Envíos</a></li>
+          <li><a href="#">Cambios y devoluciones</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contacto</h5>
+        <ul>
+          <li id="footerPhone">WhatsApp: +57 300 000 0000</li>
+          <li id="footerCity">Medellín, Colombia</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 White Glow. Todos los derechos reservados.</span>
+      <span style="display:flex; gap:18px; align-items:center;">
+        <span>Diseñado con brillo ✦</span>
+        <a href="admin.html">Panel de administración</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" href="#" id="floatWhatsapp" target="_blank" aria-label="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 32 32" fill="#fff"><path d="M16.04 4C9.4 4 4 9.4 4 16.04c0 2.18.58 4.3 1.68 6.18L4 28l5.93-1.65a11.96 11.96 0 0 0 6.1 1.67h.01c6.64 0 12.04-5.4 12.04-12.04C28.08 9.4 22.68 4 16.04 4zm0 22.04h-.01a10 10 0 0 1-5.09-1.39l-.36-.21-3.62 1 .96-3.6-.23-.37a9.98 9.98 0 0 1-1.53-5.43c0-5.52 4.49-10.02 10.02-10.02 5.52 0 10.02 4.5 10.02 10.02 0 5.52-4.5 10-10.16 10zm5.47-7.5c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.46-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01s-.52.07-.8.37c-.27.3-1.04 1.02-1.04 2.5s1.07 2.9 1.22 3.1c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35z"/></svg>
+</a>
+
+<script>
+/* ============================================================
+   WHITE GLOW — motor del sitio
+   ------------------------------------------------------------
+   Este archivo YA NO necesita ser editado a mano para cambiar
+   productos ni datos de contacto. Todo eso vive en:
+     - productos.json   (catálogo)
+     - config.json      (WhatsApp, anuncio, redes, estadísticas)
+   Edítalos fácilmente desde admin.html (Panel de administración).
+   Si abres el sitio con doble clic (file://) el navegador puede
+   bloquear la carga de esos archivos; en ese caso, usa un
+   servidor local o súbelo a tu hosting — ahí funciona normal.
+   ============================================================ */
+
+const FALLBACK_CONFIG = {
+  whatsappNumero: "573000000000",
+  whatsappMensaje: "Hola White Glow, quiero más información",
+  anuncio: "Envíos a toda Colombia · Empaques de regalo sin costo · Paga contraentrega",
+  ciudad: "Medellín, Colombia",
+  instagram: "#", tiktok: "#",
+  estadisticas: [
+    { valor:"+1.200", etiqueta:"Clientes felices" },
+    { valor:"4.9/5", etiqueta:"Calificación promedio" },
+    { valor:"100%", etiqueta:"Piezas hipoalergénicas" }
+  ]
+};
+const FALLBACK_PRODUCTS = [];
+
+let CONFIG = FALLBACK_CONFIG;
+let PRODUCTS = FALLBACK_PRODUCTS;
+
+function waLink(numero, message){
+  return "https://wa.me/" + numero + "?text=" + encodeURIComponent(message);
+}
+function formatCOP(n){
+  return "$" + Number(n).toLocaleString("es-CO") + " COP";
+}
+const waIcon = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.2-1.3c1.4.8 3.1 1.3 4.8 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.18 8.18 0 013.8 12 8.2 8.2 0 1112 20.2z"/></svg>';
+
+function applyConfig(){
+  const generalLink = waLink(CONFIG.whatsappNumero, CONFIG.whatsappMensaje);
+  ["navWhatsapp","contactWhatsapp","footerWhatsapp","floatWhatsapp"].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.href = generalLink;
+  });
+  const digits = String(CONFIG.whatsappNumero);
+  const phoneDisplay = "+" + digits.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})$/, "$1 $2 $3 $4");
+  const footerPhoneEl = document.getElementById("footerPhone");
+  if(footerPhoneEl) footerPhoneEl.textContent = "WhatsApp: " + (phoneDisplay.length > 3 ? phoneDisplay : digits);
+
+  const footerCityEl = document.getElementById("footerCity");
+  if(footerCityEl) footerCityEl.textContent = CONFIG.ciudad || "";
+
+  const announceEl = document.getElementById("announceBar");
+  if(announceEl && CONFIG.anuncio){
+    const parts = CONFIG.anuncio.split("·").map(s=>s.trim()).filter(Boolean);
+    announceEl.innerHTML = "✨ " + parts.map((p,i)=> i===0 ? p : `&nbsp;<span>·</span>&nbsp;${p}`).join("");
+  }
+
+  const ig = document.getElementById("footerInstagram");
+  if(ig && CONFIG.instagram) ig.href = CONFIG.instagram;
+  const tk = document.getElementById("footerTiktok");
+  if(tk && CONFIG.tiktok) tk.href = CONFIG.tiktok;
+
+  const statsEl = document.getElementById("heroStats");
+  if(statsEl && Array.isArray(CONFIG.estadisticas)){
+    statsEl.innerHTML = CONFIG.estadisticas.map(s => `<div><b>${s.valor}</b><span>${s.etiqueta}</span></div>`).join("");
+  }
+}
+
+function renderProducts(cat){
+  const grid = document.getElementById("productGrid");
+  const items = PRODUCTS.filter(p => p.categoria === cat && p.activo !== false);
+  if(items.length === 0){
+    grid.innerHTML = `<div class="empty-state">Aún no hay productos en esta categoría. Agrégalos desde el Panel de administración.</div>`;
+    return;
+  }
+  grid.innerHTML = items.map(p => `
+    <div class="product-card reveal">
+      <div class="product-img"><img src="${p.imagen}" alt="${p.nombre}" loading="lazy"></div>
+      <div class="product-info">
+        <div class="eyebrow">${p.etiqueta || ""}</div>
+        <h4>${p.nombre}</h4>
+        <div class="p-rating"><span class="stars">★★★★★</span><span>${p.calificacion} (${p.resenas})</span></div>
+        <div class="price">${formatCOP(p.precio)}${p.precioAnterior ? `<span class="old-price">${formatCOP(p.precioAnterior)}</span>` : ""}</div>
+        <a class="buy-btn" target="_blank" href="${waLink(CONFIG.whatsappNumero, 'Hola, quiero comprar: ' + p.nombre)}">${waIcon} Comprar</a>
+      </div>
+    </div>
+  `).join("");
+}
+
+async function init(){
+  try{
+    const [cfgRes, prodRes] = await Promise.all([
+      fetch("config.json", {cache:"no-store"}),
+      fetch("productos.json", {cache:"no-store"})
+    ]);
+    if(cfgRes.ok) CONFIG = await cfgRes.json();
+    if(prodRes.ok) PRODUCTS = await prodRes.json();
+  }catch(e){
+    console.warn("No se pudieron cargar config.json/productos.json (¿abriste el archivo con doble clic? usa un servidor o súbelo a tu hosting).", e);
+  }
+  applyConfig();
+  renderProducts("joyeria");
+}
+init();
+
+document.querySelectorAll(".tab-btn").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    renderProducts(btn.dataset.tab);
+  });
+});
+document.querySelectorAll(".cat-card[data-cat]").forEach(card=>{
+  card.addEventListener("click", (e)=>{
+    e.preventDefault();
+    const cat = card.dataset.cat;
+    document.querySelectorAll(".tab-btn").forEach(b=>b.classList.toggle("active", b.dataset.tab===cat));
+    renderProducts(cat);
+    document.getElementById("productos").scrollIntoView({behavior:"smooth"});
+  });
+});
+
+// Menú móvil
+const menuToggle = document.getElementById("menuToggle");
+const mobilePanel = document.getElementById("mobilePanel");
+const iconBurger = document.querySelector(".icon-burger");
+const iconClose = document.querySelector(".icon-close");
+menuToggle.addEventListener("click", ()=>{
+  const isOpen = mobilePanel.classList.toggle("open");
+  menuToggle.setAttribute("aria-expanded", String(isOpen));
+  iconBurger.style.display = isOpen ? "none" : "block";
+  iconClose.style.display = isOpen ? "block" : "none";
+});
+mobilePanel.querySelectorAll("a").forEach(a=>{
+  a.addEventListener("click", ()=>{
+    mobilePanel.classList.remove("open");
+    iconBurger.style.display = "block";
+    iconClose.style.display = "none";
+    menuToggle.setAttribute("aria-expanded","false");
+  });
+});
+</script>
+</body>
+</html>

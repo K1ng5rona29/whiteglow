@@ -1,0 +1,20 @@
+[
+  { "id": "p1", "activo": true, "categoria": "joyeria", "etiqueta": "Anillos", "nombre": "Anillo Aura", "precio": 89000, "precioAnterior": null, "calificacion": 4.8, "resenas": 62,
+    "imagen": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80" },
+  { "id": "p2", "activo": true, "categoria": "joyeria", "etiqueta": "Collares", "nombre": "Cadena Lumière", "precio": 145000, "precioAnterior": null, "calificacion": 4.9, "resenas": 87,
+    "imagen": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80" },
+  { "id": "p3", "activo": true, "categoria": "joyeria", "etiqueta": "Aretes", "nombre": "Aretes Halo", "precio": 76000, "precioAnterior": 95000, "calificacion": 4.7, "resenas": 45,
+    "imagen": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=600&q=80" },
+  { "id": "p4", "activo": true, "categoria": "joyeria", "etiqueta": "Pulseras · Oro laminado 18K", "nombre": "Pulsera Selene", "precio": 68000, "precioAnterior": null, "calificacion": 4.8, "resenas": 33,
+    "imagen": "https://images.unsplash.com/photo-1612626301070-918a5e1e2cc1?auto=format&fit=crop&w=600&q=80" },
+  { "id": "p5", "activo": true, "categoria": "joyeria", "etiqueta": "Pulseras · Oro laminado 18K · Unisex", "nombre": "Pulsera Atlas", "precio": 72000, "precioAnterior": null, "calificacion": 4.9, "resenas": 18,
+    "imagen": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=600&q=80" },
+  { "id": "p6", "activo": true, "categoria": "skincare", "etiqueta": "Sérums", "nombre": "Sérum Glow C", "precio": 68000, "precioAnterior": null, "calificacion": 4.9, "resenas": 104,
+    "imagen": "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=600&q=80" },
+  { "id": "p7", "activo": true, "categoria": "skincare", "etiqueta": "Hidratación", "nombre": "Crema Velvet Glow", "precio": 72000, "precioAnterior": null, "calificacion": 4.7, "resenas": 58,
+    "imagen": "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=600&q=80" },
+  { "id": "p8", "activo": true, "categoria": "skincare", "etiqueta": "Sets", "nombre": "Ritual Nocturno", "precio": 129000, "precioAnterior": 160000, "calificacion": 4.6, "resenas": 29,
+    "imagen": "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=600&q=80" },
+  { "id": "p9", "activo": true, "categoria": "skincare", "etiqueta": "Contorno", "nombre": "Gel Despertar", "precio": 54000, "precioAnterior": null, "calificacion": 4.8, "resenas": 21,
+    "imagen": "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=600&q=80" }
+]
